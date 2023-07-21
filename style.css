@@ -1,0 +1,28 @@
+body {
+    background-color: #FFF4B6;
+    font-size: 100%;
+}
+
+.intro {
+    background-color: lightpink;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+    height: fit-content;
+    padding: 2em;
+}
+
+.h {
+    font-size: 250%;
+    font-weight: bold;
+    font-family: Spectral, serif;
+    text-align: center;
+}
+
+.p {
+    font-family: Rubik, sans-serif;
+    font-size: 1em;
+    text-align: center;
+}

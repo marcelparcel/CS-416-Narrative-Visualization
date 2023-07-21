@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Narrative Visualization</title>
         <script src="https://d3js.org/d3.v7.min.js"></script> <!--d3 library-->
         <script src="https://unpkg.com/topojson-client@3"></script> <!--topojson client-->
         <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script> <!--d3-annotations library-->
-        <title>Narrative Visualization</title>
+        <script src="data.js"></script>
         <meta charset="UTF-8">
         <meta name="author" content="Marcel Hoang">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <p>This is a <br> paragraph with a line break.</p>
+    <body onload="init()">
+        <div class="intro">
+            <p class="p">
+                wait so you're saying i'm skinny?
+            </p>
+        </div>
     </body>
 </html>
