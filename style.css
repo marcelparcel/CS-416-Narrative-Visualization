@@ -15,14 +15,34 @@ body {
 }
 
 .h {
-    font-size: 250%;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    font-size: 2.5em;
     font-weight: bold;
     font-family: Spectral, serif;
     text-align: center;
 }
 
 .p {
+    width: fit-content;
+    height: fit-content;
     font-family: Rubik, sans-serif;
     font-size: 1em;
+    text-align: center;
+}
+
+.caption {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,50%);
+    font-family: Rubik, sans-serif;
+    font-weight: 300;
+    font-size: 0.25em;
     text-align: center;
 }

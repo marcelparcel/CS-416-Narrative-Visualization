@@ -9,3 +9,10 @@ async function init() {
         tot_data[i-1].rank = i;
     }
 }
+
+function intro(data) {
+    ys = d3.scaleLog().domain([0,6206299]).range([0,200]);
+    xs = d3.scaleLinear().domain([0,6206299]).range([0,200]);
+    d3.select("svg").selectAll("circle").data(data).enter().append("circle")
+    .attr("cx", function(d,i) {return d.sales;});
+}
