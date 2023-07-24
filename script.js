@@ -11,8 +11,16 @@ async function init() {
 }
 
 function intro(data) {
-    ys = d3.scaleLog().domain([0,6206299]).range([0,200]);
-    xs = d3.scaleLinear().domain([0,6206299]).range([0,200]);
+    ys = d3.scaleLinear().domain([0,7000000]).range([200,0]);
+    xs = d3.scaleLinear().domain([0,7000000]).range([0,200]);
     d3.select("svg").selectAll("circle").data(data).enter().append("circle")
     .attr("cx", function(d,i) {return d.sales;});
 }
+
+/*
+ideas for charts:
+rollup line graph comparing bgs and ggs over the years - ability to transition to each year and tooltip showing best selling album of that year
+pie chart of sales by company in the top 100 bgs and ggs - breaking down further by group
+stacked bar chart by year of bg and gg album sales by year - ability to switch to grouped bar charts
+extra little thing at the end where you can listen to a snippet of any of the top songs (if time permits)
+*/
