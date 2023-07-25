@@ -3,20 +3,20 @@
     <head>
         <title>Narrative Visualization</title>
         <script src="https://d3js.org/d3.v7.min.js"></script> <!--d3 library-->
-        <script src="https://unpkg.com/topojson-client@3"></script> <!--topojson client-->
         <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script> <!--d3-annotations library-->
-        <script src="script.js"></script>
         <meta charset="UTF-8">
         <meta name="author" content="Marcel Hoang">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
         <link rel="stylesheet" href="style.css">
     </head>
-    <body onload="init()">
-        <div class="h">KPOP Group Album Sales <div class="caption">as of July 20th 2023</div></div>
-        <div class="intro">
-            <!--<svg width=62.5em height=43.75em></svg>-->
+    <body>
+        <div class="header">KPOP Group Album Sales <div class="caption">as of July 20th 2023</div></div>
+        <button type="button" class="prev">&#8249;</button>
+        <button type="button" class="next">&#8250;</button>
+        <div id="svg-container" class="intro">
+           
         </div>
-        
+        <script type="module" src="script.js"></script> 
     </body>
 </html>

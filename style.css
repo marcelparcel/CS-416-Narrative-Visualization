@@ -14,7 +14,7 @@ body {
     padding: 2em;
 }
 
-.h {
+.header {
     width: fit-content;
     height: fit-content;
     position: relative;
@@ -27,7 +27,7 @@ body {
     text-align: center;
 }
 
-.p {
+.text {
     width: fit-content;
     height: fit-content;
     font-family: Rubik, sans-serif;
@@ -45,4 +45,32 @@ body {
     font-weight: 300;
     font-size: 0.25em;
     text-align: center;
+}
+
+.prev {
+    color: ivory;
+    background-color: darkgray;
+    width: 2em;
+    height: 2em;
+    font-size: 2em;
+    position: fixed;
+    font-family: Rubik, sans-serif;
+    top: 50%;
+    left: 10%;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.next {
+    color: ivory;
+    background-color: coral;
+    width: 2em;
+    height: 2em;
+    font-size: 2em;
+    position: fixed;
+    font-family: Rubik, sans-serif;
+    top: 50%;
+    right: 10%;
+    text-align: center;
+    border-radius: 50%;
 }
