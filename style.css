@@ -3,28 +3,29 @@ body {
     font-size: 100%;
 }
 
-.intro {
-    background-color: lightpink;
-    position: fixed;
-    top: 50%;
+.graph {
+    background-color: cornsilk;
+    position: relative;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, 0%);
     width: fit-content;
     height: fit-content;
     padding: 2em;
 }
 
 .header {
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, 10%);
     font-size: 2.5em;
     font-weight: bold;
     font-family: Spectral, serif;
     text-align: center;
+    padding: 0.1em;
+    margin: 0 auto;
+}
+
+.container {
+    padding: 1em;
+    width: 85vw;
+    margin: 0 auto;
 }
 
 .text {
@@ -36,26 +37,24 @@ body {
 }
 
 .caption {
-    width: fit-content;
-    height: fit-content;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,50%);
     font-family: Rubik, sans-serif;
     font-weight: 300;
-    font-size: 0.25em;
+    font-size: 0.5em;
     text-align: center;
+}
+
+.button {
+    width: 3em;
+    height: 3em;
+    font-size: 3em;
+    position: absolute;
+    font-family: Rubik, sans-serif;
+    top: 10%;
 }
 
 .prev {
     color: ivory;
     background-color: darkgray;
-    width: 2em;
-    height: 2em;
-    font-size: 2em;
-    position: fixed;
-    font-family: Rubik, sans-serif;
-    top: 50%;
     left: 10%;
     text-align: center;
     border-radius: 50%;
@@ -64,12 +63,6 @@ body {
 .next {
     color: ivory;
     background-color: coral;
-    width: 2em;
-    height: 2em;
-    font-size: 2em;
-    position: fixed;
-    font-family: Rubik, sans-serif;
-    top: 50%;
     right: 10%;
     text-align: center;
     border-radius: 50%;
