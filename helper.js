@@ -52,11 +52,6 @@ export async function init() {
     return {"gg": gg_data, "bg": bg_data, "tot": tot_data};
 }
 
-export const text_node = t => {
-    document.getElementById("svg-container").classList.add("intro");
-    return document.createTextNode(t);
-}
-
 export function cumsum_line(tot, gg, bg) {
     const width = 1000;
     const height = 700;
@@ -360,8 +355,8 @@ export function bar_chart(data) {
         if (layout === "stacked") transitionStacked();
         else transitionGrouped();
     }
-
     let layout = "stacked";
+    update(layout);
     svg.on("click", () => {
         layout = layout === "stacked" ? "grouped" : "stacked";
         update(layout);
