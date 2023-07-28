@@ -65,14 +65,13 @@ export function cumsum_line(tot, gg, bg) {
     const marginBottom = 30;
     const marginLeft = 40;
 
-    const transpose = m => m[0].map((x,i) => m.map(x => x[i]));
     const obj_array = a => a.map(([date, sales]) => ({date, sales}));
 
     gg.sort((x,y) => d3.ascending(x.release, y.release));
-    const gg_sum = obj_array(transpose([gg.map(d => d.release), d3.cumsum(gg.map(d => d.sales/1000000))]));
+    const gg_sum = obj_array(d3.transpose([gg.map(d => d.release), d3.cumsum(gg.map(d => d.sales/1000000))]));
 
     bg.sort((x,y) => d3.ascending(x.release, y.release));
-    const bg_sum = obj_array(transpose([bg.map(d => d.release), d3.cumsum(bg.map(d => d.sales/1000000))]));
+    const bg_sum = obj_array(d3.transpose([bg.map(d => d.release), d3.cumsum(bg.map(d => d.sales/1000000))]));
 
     const xs = d3.scaleUtc(d3.extent(tot, d => d.release), [marginLeft, width - marginRight]);
     const ys = d3.scaleLinear([0, d3.max(bg_sum, d => d.sales)], [height - marginBottom, marginTop]);
@@ -127,8 +126,6 @@ export function sunburst(data) {
     const hierarchy = d3.hierarchy(salesByGroup).sum(d => d.sales).sort((x,y) => d3.descending(x.value, y.value));
 
     const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, hierarchy.children.length + 1));
-
-    console.log(hierarchy);
 
     const root = d3.partition()
         .size([2 * Math.PI, hierarchy.height + 1])(hierarchy);
@@ -233,7 +230,144 @@ export function sunburst(data) {
 }
 
 export function bar_chart(data) {
+    const width = 1000;
+    const height = 700;
+    const marginTop = 20;
+    const marginRight = 0;
+    const marginBottom = 20;
+    const marginLeft = 20;
 
+    const dates = Array.from(new Set(data.map(d => d.release.getFullYear())));
+    const xz = d3.range(dates.length);
+    const sby = d3.rollups(data, v => d3.sum(v, d => d.sales), d => d.gender, d => (d.release.getFullYear()));
+    sby[0][1].push([2010, 0]);
+    sby[0][1].push([2011, 0]);
+    sby[1][1].sort((x,y) => d3.ascending(x[0], y[0]));
+    sby[0][1].sort((x,y) => d3.ascending(x[0], y[0]));
+    
+    const yz = [];
+
+    for (let i = 0; i < sby.length; i++) {
+        const yearly = [];
+        for (let j = 0; j < sby[0][1].length; j++) {
+            yearly.push(sby[i][1][j][1]/1000000);
+        }
+        yz.push(yearly);
+    }
+
+    const n = yz.length;
+
+    const y01z = d3.stack()
+        .keys(d3.range(n))
+        (d3.transpose(yz))
+        .map((data, i) => data.map(([y0, y1]) => [y0, y1, i]));
+
+    const yMax = d3.max(yz, y => d3.max(y));
+    const y1Max = d3.max(y01z, y => d3.max(y, d => d[1]));
+
+    const x = d3.scaleBand()
+        .domain(xz)
+        .rangeRound([marginLeft, width - marginRight])
+        .padding(0.08);
+
+    const y = d3.scaleLinear()
+        .domain([0, y1Max])
+        .range([height - marginBottom, marginTop]);
+
+    const color = [d3.rgb("royalblue"), d3.rgb("crimson")];
+
+    const svg = d3.create("svg")
+        .attr("id", "bar")
+        .attr("viewBox", [0, 0, width, height])
+        .attr("width", width)
+        .attr("height", height)
+        .attr("style", "max-width: 100%; height: auto;")
+        .attr("class", "graph");
+
+    const rect = svg.selectAll("g")
+        .data(y01z)
+        .join("g")
+        .attr("fill", (d, i) => color[i])
+        .attr("opacity", 0.5)
+        .selectAll("rect")
+        .data(d => d)
+        .join("rect")
+        .attr("x", (d, i) => x(i))
+        .attr("y", height - marginBottom)
+        .attr("width", x.bandwidth())
+        .attr("height", 0);
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height - marginBottom})`)
+        .call(d3.axisBottom(x).tickSizeOuter(0).tickFormat((d,i) => i+2010));
+
+    svg.append("g")
+        .attr("id","y-axis")
+        .attr("transform", `translate(${marginLeft},0)`)
+        .call(d3.axisLeft(y).ticks(height / 40))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.selectAll(".tick line").clone()
+            .attr("x2", width - marginLeft - marginRight)
+            .attr("stroke-opacity", 0.1))
+        .call(g => g.append("text")
+            .attr("x", -marginLeft)
+            .attr("y", 10)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .text("Sales in Millions of Units"));
+
+    function transitionGrouped() {
+        y.domain([0, yMax]);
+
+        rect.transition()
+            .duration(500)
+            .delay((d, i) => i * 20)
+            .attr("x", (d, i) => x(i) + x.bandwidth() / n * d[2])
+            .attr("width", x.bandwidth() / n)
+        .transition()
+            .attr("y", d => y(d[1] - d[0]))
+            .attr("height", d => y(0) - y(d[1] - d[0]));
+        
+        svg.select("#y-axis").transition().duration(500).attr("transform", `translate(${marginLeft},0)`)
+        .call(d3.axisLeft(y).ticks(height / 40))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.selectAll(".tick line")
+            .attr("x2", width - marginLeft - marginRight)
+            .attr("stroke-opacity", 0.1));
+    }
+
+    function transitionStacked() {
+        y.domain([0, y1Max]);
+
+        rect.transition()
+            .duration(500)
+            .delay((d, i) => i * 20)
+            .attr("y", d => y(d[1]))
+            .attr("height", d => y(d[0]) - y(d[1]))
+        .transition()
+            .attr("x", (d, i) => x(i))
+            .attr("width", x.bandwidth());
+
+        svg.select("#y-axis").transition().duration(500).attr("transform", `translate(${marginLeft},0)`)
+            .call(d3.axisLeft(y).ticks(height / 40))
+            .call(g => g.select(".domain").remove())
+            .call(g => g.selectAll(".tick line")
+                .attr("x2", width - marginLeft - marginRight)
+                .attr("stroke-opacity", 0.1));
+    }
+
+    function update(layout) {
+        if (layout === "stacked") transitionStacked();
+        else transitionGrouped();
+    }
+
+    let layout = "stacked";
+    svg.on("click", () => {
+        layout = layout === "stacked" ? "grouped" : "stacked";
+        update(layout);
+    });
+
+    return Object.assign(svg.node(), {update});
 }
 
 /*
