@@ -5,6 +5,8 @@ const data = await help.init();
 const story = new help.Story();
 const line = [help.cumsum_line(data.tot, data.gg, data.bg)];
 const sunburst = [help.sunburst(data.tot),
+    document.createTextNode("click a slice to go further in the group"),
+    document.createElement("br"),
     document.createTextNode("hover over a slice to view more info"),
     document.createElement("br"),
     document.createTextNode("click the center to go back")];
@@ -30,6 +32,7 @@ document.getElementsByClassName("header")[0].onclick = () => {
     document.getElementById("svg-container").appendChild(story.currSceneContent[0]);
     document.getElementById("svg-container").appendChild(document.getElementById("buttons"));
     document.getElementById("buttons").style.display = "block";
+    document.getElementById("intro").style.display = "none";
 }
 
 document.getElementsByClassName("prev")[0].onclick = () => {
