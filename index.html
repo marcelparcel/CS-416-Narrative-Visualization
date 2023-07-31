@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Narrative Visualization</title>
+        <title>K-Pop Group Album Sales</title>
         <script src="https://d3js.org/d3.v7.min.js"></script> <!--d3 library-->
         <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script> <!--d3-annotations library-->
         <meta charset="UTF-8">
@@ -11,9 +11,11 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class="header">KPOP Group Album Sales<div class="caption">as of July 20th 2023</div></div>
+        <div id="title" class="header">Top 100 K-Pop Boy and Girl Groups Album Sales<div class="caption">as of July 20th 2023 according to Circle Chart</div></div>
+        <div id="graph-title" class="header"></div>
         <div id="svg-container" class="container">
             <div id="intro" class="text">Click the title to begin!</div>
+            <div id="instruct" class="text">Click the buttons to navigate through each chart</div>
             <div id="buttons" style="display: none;">
                 <button type="button" class="button prev">&#8249;</button>
                 <button type="button" class="button next">&#8250;</button>

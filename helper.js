@@ -1,3 +1,16 @@
+export const tooltip = d3.select("#svg-container").append("div")
+    .style("position", "absolute").style("z-index", 10).style("visibility", "hidden")
+    .style("background-color", "linen").style("padding", "4px").style("font-family", "verdana")
+    .style("border", "solid").style("border-width", "1px").style("border-radius", "5px")
+    .style("font-size", "15px").style("stroke", "black").text("");
+
+export const mousemove = (event, d) => {
+    const [x, y] = d3.pointer(event, document.body);
+    return tooltip.style("top", (y) + "px").style("left", (x + 20) + "px");
+};
+
+export const mouseleave = (event, d) => { return tooltip.style("visibility", "hidden"); };
+
 export class Story {
     #scenes = [];
     currScene;
@@ -62,11 +75,11 @@ export function cumsum_line(tot, gg, bg) {
 
     const obj_array = a => a.map(([date, sales]) => ({date, sales}));
 
-    gg.sort((x,y) => d3.ascending(x.release, y.release));
-    const gg_sum = obj_array(d3.transpose([gg.map(d => d.release), d3.cumsum(gg.map(d => d.sales/1000000))]));
+    const gg_datum = gg.sort((x,y) => d3.ascending(x.release, y.release));
+    const gg_sum = obj_array(d3.transpose([gg_datum.map(d => d.release), d3.cumsum(gg.map(d => d.sales/1000000))]));
 
-    bg.sort((x,y) => d3.ascending(x.release, y.release));
-    const bg_sum = obj_array(d3.transpose([bg.map(d => d.release), d3.cumsum(bg.map(d => d.sales/1000000))]));
+    const bg_datum = bg.sort((x,y) => d3.ascending(x.release, y.release));
+    const bg_sum = obj_array(d3.transpose([bg_datum.map(d => d.release), d3.cumsum(bg.map(d => d.sales/1000000))]));
 
     const xs = d3.scaleUtc(d3.extent(tot, d => d.release), [marginLeft, width - marginRight]);
     const ys = d3.scaleLinear([0, d3.max(bg_sum, d => d.sales)], [height - marginBottom, marginTop]);
@@ -109,6 +122,24 @@ export function cumsum_line(tot, gg, bg) {
       .attr("stroke-width", 1.5)
       .attr("d", line(bg_sum));
 
+    svg.append("text")
+    .attr("x",120)
+    .attr("y",600)
+    .html("The 3rd generation of K-Pop started in 2012")
+    .style("class", "caption");
+
+    svg.append("text")
+    .attr("x",420)
+    .attr("y",490)
+    .html("The 4th generation of K-Pop started in 2018")
+    .style("class", "caption");
+
+    svg.append("text")
+    .attr("x",650)
+    .attr("y",50)
+    .html("The 5th generation of K-Pop started in 2023")
+    .style("class", "caption");
+
     return svg.node();
 }
 
@@ -117,7 +148,7 @@ export function sunburst(data) {
     const height = width;
     const radius = width/6;
 
-    const salesByGroup = d3.group(data, d => d.label, d => d.sublabel, d => d.group, d => d.album);
+    const salesByGroup = d3.group(data, d => d.label, d => d.sublabel, d => d.gender, d => d.group, d => d.album);
     const hierarchy = d3.hierarchy(salesByGroup).sum(d => d.sales).sort((x,y) => d3.descending(x.value, y.value));
 
     const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, hierarchy.children.length + 1));
@@ -310,6 +341,28 @@ export function bar_chart(data) {
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
             .text("Sales in Millions of Units"));
+    
+    svg.append("text")
+    .attr("x",550)
+    .attr("y",80)
+    .html("The best selling albums for both boy")
+    .style("class", "caption");
+    svg.append("text")
+    .attr("x",550)
+    .attr("y",100)
+    .html("and girl groups were both released in 2022")
+    .style("class", "caption");
+
+    svg.append("text")
+    .attr("x",50)
+    .attr("y",548)
+    .html("The earliest girl group album in the top 100 was released in 2010")
+    .style("class", "caption");
+    svg.append("text")
+    .attr("x",100)
+    .attr("y",570)
+    .html("While the first boy group album in the top 100 released in 2012")
+    .style("class", "caption");
 
     function transitionGrouped() {
         y.domain([0, yMax]);

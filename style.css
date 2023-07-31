@@ -24,7 +24,7 @@ body {
 
 .container {
     padding: 1em;
-    width: 85vw;
+    width: 65vw;
     margin: 0 auto;
 }
 
@@ -48,13 +48,13 @@ body {
     font-size: 3em;
     position: absolute;
     font-family: Rubik, sans-serif;
-    top: 10%;
+    top: 20%;
 }
 
 .prev {
     color: ivory;
     background-color: darkgray;
-    left: 10%;
+    left: 8%;
     text-align: center;
     border-radius: 50%;
 }
@@ -62,7 +62,7 @@ body {
 .next {
     color: ivory;
     background-color: coral;
-    right: 10%;
+    right: 8%;
     text-align: center;
     border-radius: 50%;
 }
