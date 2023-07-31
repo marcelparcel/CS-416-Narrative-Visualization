@@ -1,16 +1,3 @@
-export const tooltip = d3.select("#svg-container").append("div")
-    .style("position", "absolute").style("z-index", 10).style("visibility", "hidden")
-    .style("background-color", "linen").style("padding", "4px").style("font-family", "verdana")
-    .style("border", "solid").style("border-width", "1px").style("border-radius", "5px")
-    .style("font-size", "15px").style("stroke", "black").text("");
-
-export const mousemove = (event, d) => {
-    const [x, y] = d3.pointer(event, document.body);
-    return tooltip.style("top", (y) + "px").style("left", (x + 20) + "px");
-};
-
-export const mouseleave = (event, d) => { return tooltip.style("visibility", "hidden"); };
-
 export class Story {
     #scenes = [];
     currScene;
