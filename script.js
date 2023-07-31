@@ -4,29 +4,6 @@ const data = await help.init();
 
 const story = new help.Story();
 
-const line = [help.cumsum_line(data.tot, data.gg, data.bg),
-    document.createTextNode("Total album sales of boy groups and girl groups from 2010 to now")];
-
-const bar = [help.bar_chart(data.tot),
-    document.createTextNode("Album sales by year of boy groups and girl groups"),
-    document.createTextNode("click the chart to switch graphs")];
-
-const sunburst = [help.sunburst(data.tot),
-        document.createTextNode("Album sales by company -> label -> gender -> group"),
-        document.createTextNode("click a slice to go further in the group"),
-        document.createElement("br"),
-        document.createTextNode("hover over a slice to view more info"),
-        document.createElement("br"),
-        document.createTextNode("click the center to go back")];
-
-const conclusion = [document.createTextNode("As you've seen, boy groups have been leading in sales since the 3rd generation of K-Pop. However, when looking at streaming charts rather than album sales, girl groups are the ones that outperform boy groups.   "),
-document.createTextNode("Conclusion")];
-
-story.addScene(line);
-story.addScene(bar);
-story.addScene(sunburst);
-story.addScene(conclusion);
-
 const removeAllChildren = (p) => {
     while(p.firstChild) {
         p.removeChild(p.firstChild);
@@ -39,7 +16,30 @@ const addAllChildren = (p, l) => {
     }
 }
 
-document.getElementById("title").onclick = () => { 
+document.getElementById("intro").onclick = () => {
+    const line = [help.cumsum_line(data.tot, data.gg, data.bg),
+        document.createTextNode("Total album sales of boy groups and girl groups from 2010 to now")];
+    
+    const bar = [help.bar_chart(data.tot),
+        document.createTextNode("Album sales by year of boy groups and girl groups"),
+        document.createTextNode("click the chart to switch graphs")];
+    
+    const sunburst = [help.sunburst(data.tot),
+            document.createTextNode("Album sales by company -> label -> gender -> group"),
+            document.createTextNode("click a slice to go further in the group"),
+            document.createElement("br"),
+            document.createTextNode("hover over a slice to view more info"),
+            document.createElement("br"),
+            document.createTextNode("click the center to go back")];
+    
+    const conclusion = [document.createTextNode("As you've seen, boy groups have been leading in sales since the 3rd generation of K-Pop. However, when looking at streaming charts rather than album sales, girl groups are the ones that outperform boy groups.   "),
+    document.createTextNode("Conclusion")];
+    
+    story.addScene(line);
+    story.addScene(bar);
+    story.addScene(sunburst);
+    story.addScene(conclusion);
+    
     document.getElementById("svg-container").appendChild(story.currSceneContent[0]);
     document.getElementById("graph-title").appendChild(story.currSceneContent[1]);
     document.getElementById("svg-container").appendChild(document.getElementById("buttons"));

@@ -125,17 +125,36 @@ export function cumsum_line(tot, gg, bg) {
         .attr("text-anchor", "start")
         .text("Total Sales in Millions of Units"));
 
-    svg.append("path")
+
+
+    const gg_line = svg.append("path")
       .attr("fill", "none")
       .attr("stroke", "crimson")
       .attr("stroke-width", 1.5)
       .attr("d", line(gg_sum));
+    const gg_len = gg_line.node().getTotalLength();
+    gg_line.attr("stroke-dasharray", gg_len + " " + gg_len)
+    .attr("stroke-dashoffset", gg_len)
+    .transition()
+    .ease(d3.easeLinear)
+    .attr("stroke-dashoffset", 0)
+    .delay(1000)
+    .duration(3000);
 
-    svg.append("path")
+    const bg_line = svg.append("path")
       .attr("fill", "none")
       .attr("stroke", "royalblue")
       .attr("stroke-width", 1.5)
       .attr("d", line(bg_sum));
+    const bg_len = bg_line.node().getTotalLength();
+    bg_line.attr("stroke-dasharray", bg_len + " " + bg_len)
+    .attr("stroke-dashoffset", bg_len)
+    .transition()
+    .ease(d3.easeLinear)
+    .attr("stroke-dashoffset", 0)
+    .delay(1000)
+    .duration(3000);
+
 
     svg.append("text")
     .attr("x",50)
