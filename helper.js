@@ -79,6 +79,34 @@ export function cumsum_line(tot, gg, bg) {
                 .attr("class", "graph")
                 .attr("id", "graph");
 
+    svg.append("rect")
+        .attr("x",150)
+        .attr("y",5)
+        .attr("width",10)
+        .attr("height",10)
+        .style("fill", "royalblue");
+
+    svg.append("rect")
+        .attr("x",220)
+        .attr("y",5)
+        .attr("width",10)
+        .attr("height",10)
+        .style("fill", "crimson");
+
+    svg.append("text")
+        .attr("x",165)
+        .attr("y",15)
+        .html("Boys")
+        .style("class", "caption")
+        .style("font-family", "Rubik, sans-serif");
+
+    svg.append("text")
+        .attr("x",235)
+        .attr("y",15)
+        .html("Girls")
+        .style("class", "caption")
+        .style("font-family", "Rubik, sans-serif");
+
     svg.append("g")
     .attr("transform", `translate(0,${height - marginBottom})`)
     .call(d3.axisBottom(xs).ticks(width / 80).tickSizeOuter(0));
@@ -110,22 +138,25 @@ export function cumsum_line(tot, gg, bg) {
       .attr("d", line(bg_sum));
 
     svg.append("text")
-    .attr("x",120)
-    .attr("y",600)
+    .attr("x",50)
+    .attr("y",625)
     .html("The 3rd generation of K-Pop started in 2012")
-    .style("class", "caption");
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
 
     svg.append("text")
-    .attr("x",420)
+    .attr("x",370)
     .attr("y",490)
     .html("The 4th generation of K-Pop started in 2018")
-    .style("class", "caption");
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
 
     svg.append("text")
-    .attr("x",650)
-    .attr("y",50)
+    .attr("x",620)
+    .attr("y",55)
     .html("The 5th generation of K-Pop started in 2023")
-    .style("class", "caption");
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
 
     return svg.node();
 }
@@ -297,6 +328,36 @@ export function bar_chart(data) {
         .attr("style", "max-width: 100%; height: auto;")
         .attr("class", "graph");
 
+    svg.append("rect")
+        .attr("x",150)
+        .attr("y",5)
+        .attr("width",10)
+        .attr("height",10)
+        .style("fill", "royalblue")
+        .style("opacity", 0.5);
+
+    svg.append("rect")
+        .attr("x",220)
+        .attr("y",5)
+        .attr("width",10)
+        .attr("height",10)
+        .style("fill", "crimson")
+        .style("opacity", 0.5);
+
+    svg.append("text")
+        .attr("x",165)
+        .attr("y",15)
+        .html("Boys")
+        .style("class", "caption")
+        .style("font-family", "Rubik, sans-serif");
+
+    svg.append("text")
+        .attr("x",235)
+        .attr("y",15)
+        .html("Girls")
+        .style("class", "caption")
+        .style("font-family", "Rubik, sans-serif");
+
     const rect = svg.selectAll("g")
         .data(y01z)
         .join("g")
@@ -330,26 +391,32 @@ export function bar_chart(data) {
             .text("Sales in Millions of Units"));
     
     svg.append("text")
-    .attr("x",550)
+    .attr("x",470)
     .attr("y",80)
     .html("The best selling albums for both boy")
-    .style("class", "caption");
-    svg.append("text")
-    .attr("x",550)
-    .attr("y",100)
-    .html("and girl groups were both released in 2022")
-    .style("class", "caption");
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
 
     svg.append("text")
-    .attr("x",50)
+    .attr("x",470)
+    .attr("y",100)
+    .html("and girl groups were both released in 2022")
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
+
+    svg.append("text")
+    .attr("x",30)
     .attr("y",548)
     .html("The earliest girl group album in the top 100 was released in 2010")
-    .style("class", "caption");
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
+
     svg.append("text")
-    .attr("x",100)
+    .attr("x",30)
     .attr("y",570)
     .html("While the first boy group album in the top 100 released in 2012")
-    .style("class", "caption");
+    .style("class", "caption")
+    .style("font-family", "Rubik, sans-serif");
 
     function transitionGrouped() {
         y.domain([0, yMax]);
