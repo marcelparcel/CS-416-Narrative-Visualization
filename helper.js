@@ -98,14 +98,14 @@ export function cumsum_line(tot, gg, bg) {
         .attr("y",15)
         .html("Boys")
         .style("class", "caption")
-        .style("font-family", "Rubik, sans-serif");
+        .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
         .attr("x",235)
         .attr("y",15)
         .html("Girls")
         .style("class", "caption")
-        .style("font-family", "Rubik, sans-serif");
+        .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("g")
     .attr("transform", `translate(0,${height - marginBottom})`)
@@ -142,21 +142,21 @@ export function cumsum_line(tot, gg, bg) {
     .attr("y",625)
     .html("The 3rd generation of K-Pop started in 2012")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
     .attr("x",370)
     .attr("y",490)
     .html("The 4th generation of K-Pop started in 2018")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
     .attr("x",620)
     .attr("y",55)
     .html("The 5th generation of K-Pop started in 2023")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     return svg.node();
 }
@@ -186,7 +186,7 @@ export function sunburst(data) {
 
     const svg = d3.create("svg")
       .attr("viewBox", [-width / 2, -height / 2, width, width])
-      .style("font", "4px Rubik, sans-serif");
+      .style("font", "4px Verdana, Geneva, sans-serif");
 
     const path = svg.append("g")
         .selectAll("path")
@@ -349,14 +349,14 @@ export function bar_chart(data) {
         .attr("y",15)
         .html("Boys")
         .style("class", "caption")
-        .style("font-family", "Rubik, sans-serif");
+        .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
         .attr("x",235)
         .attr("y",15)
         .html("Girls")
         .style("class", "caption")
-        .style("font-family", "Rubik, sans-serif");
+        .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     const rect = svg.selectAll("g")
         .data(y01z)
@@ -395,28 +395,28 @@ export function bar_chart(data) {
     .attr("y",80)
     .html("The best selling boy group album is \"FML\" by SEVENTEEN released on April 24, 2023")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
     .attr("x",70)
     .attr("y",100)
     .html("The best selling girl group album is \"BORN PINK\" by BLACKPINK released on September 16, 2022")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
     .attr("x",30)
     .attr("y",548)
     .html("The earliest girl group album in the top 100 was released in 2010")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     svg.append("text")
     .attr("x",30)
     .attr("y",570)
     .html("While the first boy group album in the top 100 released in 2012")
     .style("class", "caption")
-    .style("font-family", "Rubik, sans-serif");
+    .style("font-family", "Verdana, Geneva, sans-serif").style("font-size", "0.85em");;
 
     function transitionGrouped() {
         y.domain([0, yMax]);
