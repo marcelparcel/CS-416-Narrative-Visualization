@@ -391,16 +391,16 @@ export function bar_chart(data) {
             .text("Sales in Millions of Units"));
     
     svg.append("text")
-    .attr("x",470)
+    .attr("x",70)
     .attr("y",80)
-    .html("The best selling albums for both boy")
+    .html("The best selling boy group album is \"FML\" by SEVENTEEN released on April 24, 2023")
     .style("class", "caption")
     .style("font-family", "Rubik, sans-serif");
 
     svg.append("text")
-    .attr("x",470)
+    .attr("x",70)
     .attr("y",100)
-    .html("and girl groups were both released in 2022")
+    .html("The best selling girl group album is \"BORN PINK\" by BLACKPINK released on September 16, 2022")
     .style("class", "caption")
     .style("font-family", "Rubik, sans-serif");
 
